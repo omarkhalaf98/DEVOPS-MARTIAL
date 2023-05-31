@@ -1,0 +1,84 @@
+S3 (simple storage services):
+	
+	Overview: 
+		○ Its an object based storage, u cant install OS or run database on it. 
+		○ It mange data as object not files or data blocks (store data in s3 bucket), u het unlimited storage, your files can be up to 5TB in size.
+		○ U  get unlimited storage.
+		○ When uploading on S3 u will get HTTP code 200.
+		○ URL ex--> https://bucket-name.s3.region.amazonaws.com/key.name .
+		○ Consistency model for S3 is strong read after write.
+*************************************************************************************
+	Bucket:
+		○ Buckets are private by default, to make it public u have to access the bucket and the object.
+		○ You can make the bucket public by ACL.
+		○ When u upload files on S3 ur browser get HTTP 200 status code.
+		○ Bucket is private by default. 
+		○ Bucket polices makes the entire bucket public.
+		○ U cant host dynamic website on S3, but its ok for static websites.
+		○ S3 scales automatically with demand.
+*************************************************************************************
+	Versioning: 
+		○ All versions of an object are stored in S3.
+		○ Versioning is great backup tool.
+		○ If u enabled versioning u cant disable it u can only suspend it.
+		○ U can use versioning with lifecycle.
+		○ It supports multi-factor authentication.
+*************************************************************************************
+	S3 storage classes (tier):
+		○ S3 standard:  
+			§ Suitable for most workloads (website, app, analytic data… etc.)
+		○ S3 intelligent tiering: 
+			§ Long term infrequently access critical data (backup, data store…. Etc.)
+		○ S3 standard AI: 
+			§ Long term infrequently access NOT critical data.
+		○ S3 one zone-AI:
+			§ Unknown access pattern.
+		○ Glacier instant retrieval:  
+			§ Long term data archive with instant retrieval time.
+		○ Glacier Flexible retrieval:  
+			§ Flexibility to retrieve large sets of data at no coast it can take minutes up to 12 hours (formerly known as S3 Glacier) offers a standard retrieval time of 3-5 hours, but also supports expedited retrievals in as little as 1-5 minutes.
+		○ Glacier Deep retrieval:  
+			§ Designed to retain data sets for 7-10 years it can 12 hours up to 48 hours (cheapest).
+*************************************************************************************
+	Lifecycle:
+		○ Lifecycle automate moving objects between storage tier to save money from to sown but the other way around. 
+		○ U can use lifecycle with versioning 
+		○ It can be applied to the current or previous versions.
+*************************************************************************************
+	S3 Object lock:
+		○ S3 Object lock is to store objects using a write once, read many (worm) model, that prevent objects from deletion modification.
+		○ Governance mode is not letting any user overwrite or delete an object except the users that u gave them the permissions to.
+		○ Compliance mode Not letting any user or the root user to delete or modify or overwrite object until the retention period is over.
+		○ Retention can be set to be any period u want to protect objects to be overwrite, when the time is up then u and the user can change the objects unless u placed a legal hold.
+		○ Legal hold is the same like retention period but without setting time, any user can remove the legal hold.
+	Glacier vault lock:
+		○ U can specify controls such as WORM, in vault lock policy and lock policy from future edit.
+		○ Once its locked the policy CANT be changed.  
+*************************************************************************************
+	Encryption:
+		○ Encrypt in transit:
+			§ SSL/TLS
+			§ HHTPS 
+		○ Encrypt at rest server side:
+			§ SSE-S3
+			§ SSE-KMS
+			§ SSE-C
+		○ Encrypt at rest client side:
+			§ Encrypt the files locally before uploading them. 
+		○ Enforce Encrypt server side:
+			§ Console: done by S3.
+			§ Bucket policy: u can enforce encryption by bucker policy the will deny all requests that doesn't have x-amz-side-encryption parameter in the request header.
+*************************************************************************************
+	S3 prefix:
+		○ S3 prefix is the folders and subfolders in your S3 bucket.
+		○ The more prefix to use in the S3 the better the performance will get. 3500 PUT/COPY/POST/DELETE and 5500 GET/HEAD request per second per prefix.
+		○ If u use SSE-KMS encryption there will be a limit depends on the region it can be 5500/10k/30k.
+		○ Multipart upload increase the preformance and will must use for files that’s over 5 GB .
+		○ Use S3 byte range fetches to increase the preformance when downloading files to S3.
+*************************************************************************************
+	S3 Replication:
+		○ S3 replication is to replicate objects between  buckets (Backup), versioning must be enable on both sides.
+		○ Objects in exiting buckets are NOT replicated automatically.
+		○ Delete marker are not replicated by default.
+*************************************************************************************  
+	
