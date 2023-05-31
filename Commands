@@ -1,0 +1,49 @@
+git clone:    create a local copy of a remote Git repository
+git init:     initialize a new Git repository
+git add:      stage changes for commit
+git commit:   record changes to the repository
+git push:     upload local changes to a remote repository
+git pull:     download changes from a remote repository
+git status:   display the status of the repository
+git diff:     show differences between files
+git log:      display the commit history
+git branch:   list, create, or delete branches
+git checkout: switch between branches or restore files
+git merge:    combine changes from different branches
+git rebase:   apply changes from one branch to another
+git reset     undo changes or move the current branch to a different commit
+git stash:   temporarily save changes for later use
+git tag:     create, list, or delete tags
+git submodule:  manage Git submodules
+git blame:   show who last modified each line of a file
+git cherry-pick: apply a single commit from one branch to another
+git fetch:   download changes from a remote repository without merging them
+git grep:    search for a pattern in the repository
+git init:    create a new Git repository
+git mv :     move or rename files
+git remote:  manage remote repositories
+git rm:      remove files from the repository
+git show:    show information about a commit or object
+git submodule update - update Git submodules
+git bisect: find which commit introduced a bug
+git commit --amend - modify the last commit
+git config - configure Git settings
+git describe - describe the current or specified commit
+git fetch --all - download changes from all remote repositories
+git log --graph - display the commit history in a graph format
+git pull --rebase - download changes and reapply local changes on top of them
+git push --force - upload local changes and overwrite the remote branch
+git reset --hard - discard all local changes and restore the repository to a previous commit
+git stash apply - apply the most recent stash
+git tag -a - create an annotated tag
+git blame -L - show who last modified a specific range of lines40. git branch -d - delete a branch
+git cherry - show commits that are on one branch but not another
+git diff --cached - show changes staged for commit
+git grep -n - show line numbers when searching for a pattern
+git log --author - show commits by a specific author
+git merge --no-ff - merge changes with a new commit, even if fast-forwarding is possible
+git pull --all - download changes from all remote repositories and merge them
+git push --tags - upload local tags to a remote repository
+git reset HEAD - unstage changes
+git stash drop - delete the most recent stash
+git tag -d - delete a tag
