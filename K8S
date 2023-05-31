@@ -1,0 +1,36 @@
+	1. What is kubernetes:
+		a. It’s a tool that helps use to managing containers.
+		b. Kubernetes provides tools and functionality around orchestrating container workloads.
+		c. Kubernetes is a portable, extensible, open source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
+	2. Features of K8S:
+		a. Container Orchestration:
+		b. Application reliability 
+		c. Automation
+	3. Control Plane:
+		a. Its what runs our K8S cluster globally ,  it can run on machine  in the cluster but usually run on dedicated controller machine.
+		b. Type of Control Plane:
+			i. Kupe-api-server: the primary interface to the control plane and the cluster itself.
+			ii. ETCD: the backend data store for K8S cluster.
+			iii. Kube -scheduler: the process of selecting an available node in the cluster on which the container should run.
+			iv. Kupe-controller manger: runs a collection of multiple controller utilities in single process.
+			v. Cloud controller manger: provide interface between K8S and other cloud platform.
+	4. K8S Nodes:
+		a. The machines where the containers managed by the cluster.
+		b. Nodes components:
+			i. Kubelet: it’s the K8s agent that runs on each individual node.
+				1) It communicate with control and ensure that containers are run on its node.
+				2) It handles the process of reporting container status to control plane.
+			ii. Container runtime: its not part of K8S, it’s a separate software that actually runs the container on the machine (docker , containerd).
+			iii. Kube proxy: it suns on each node providing network between container and services in the cluster.
+	5. Kubeadm: It’s a tool that simplify the process of setting our K8S cluster.
+	6. Building a K8S cluster with kubeadm: foe example we have 3 servers (1 control plane and 2 worker nodes)                  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>>>>>>>>>>>>>>>>
+		a. Install all the packages on the 3 servers (containerd and all K8S packages)
+		b. Initialize the cluster on the control plane server.
+		c. Install the calico network add-on in control plane.
+		d. Join the worker nodes to the cluster 
+	7. Name space:
+		a. Mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. 
+		b. Virtual cluster backed with the same physical cluster, it’s a way to separate and organize the objects in the cluster.
+		c. Listing exiting name spaces is done by kubectl get namespaces
+		d. All cluster have a default namespace unless I assigned a name for it (kubectl get pod --namespace the_name_of_it)
+		e. Create a new namespaces: kubectl create namespace the_name
