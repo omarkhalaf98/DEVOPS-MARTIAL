@@ -1,0 +1,50 @@
+ls:     list directory contents
+cd:     change directory
+pwd:    print working directory
+mkdir:  make directory
+rmdir:  remove directory
+cp:     copy files and directories
+mv:     move or rename files and directories
+rm:     remove files and directories
+touch:  create an empty file or update the timestamp of an existing file
+cat:    concatenate files and print to standard output
+less:   view and scroll through text files
+grep:   search for a string or regular expression in a file or output
+find:   search for files and directories in a directory hierarchy
+ps:     report information about running processes
+kill:   send a signal to a process to terminate it
+top:    display system resource usage and running processes
+df:     display disk usage statistics
+du:     display disk usage of files and directories
+tar:    create and extract compressed archive files
+gzip:   compress and decompress files with the gzip algorithm
+gunzip: decompress files compressed with gzip
+zip:    create and extract compressed archive files in the zip format
+unzip:  extract files from a zip archive
+ssh:    connect to a remote machine over a secure shell (SSH) protocol
+scp:    securely copy files between hosts over SSH
+rsync:  synchronize files between hosts over a network
+ping:   test network connectivity to a host
+traceroute: trace the path of network packets from a source to a destination
+ifconfig: configure and display network interfaces
+ip:     show and manipulate routing, devices, policy routing, and tunnels
+netstat: display network connection information
+route:   show and manipulate the IP routing table
+iptables: manipulate firewall rules
+systemctl: control the systemd system and service manager
+journalctl: query and display system logs
+useradd: create a new user account
+usermod: modify a user account
+passwd: change user password
+su: switch user
+sudo: execute a command as another user with elevated privileges
+chown: change file or directory ownership
+chmod: change file or directory permissions
+tar: create and extract compressed archive files
+curl: transfer data from or to a server
+wget: download files from the web
+ssh-keygen: generate SSH public and private keys
+scp: securely copy files between hosts overSSH
+lsof: list open files and processes
+tcpdump: capture and analyze network traffic
+awk: manipulate and process text files with patterns and actions
