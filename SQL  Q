@@ -1,0 +1,40 @@
+1. What is SQL, and what are some of the common SQL commands?
+    SQL stands for Structured Query Language, and it is a programming language used to manage and manipulate relational databases. Some common SQL commands include SELECT, INSERT, UPDATE, DELETE, and JOIN.
+2. What are the different types of SQL joins, and how do they differ?
+    The different types of SQL joins are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN. INNER JOIN only returns rows that have matching values in both tables, while LEFT JOIN and RIGHT JOIN return all rows from one table and matching rows from the other table. FULL OUTER JOIN returns all rows from both tables, including non-matching rows.
+3. What is a stored procedure, and how is it used in SQL?
+    A stored procedure is a precompiled SQL statement that is stored in a database and can be called by other SQL statements. It is used to simplify complex queries, improve performance, and enforce business rules.
+4. What is a trigger in SQL, and when might you use one?
+    A trigger is a set of SQL statements that are automatically executed in response to a specific event, such as an INSERT, UPDATE, or DELETE operation. Triggers can be used to enforce data integrity, audit changes to data, or automate tasks.
+5. What is normalization, and why is it important in database design?
+    Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It is important in database design because it helps to prevent data inconsistencies and makes it easier to maintain and update the database.
+6. What is a database index, and how does it improve query performance?
+    A database index is a data structure that is used to improve the speed of data retrieval operations. It works by creating a separate data structure that contains a subset of the data in the database, which can be accessed more quickly than the full database.
+7. What is a view in SQL, and how is it different from a table?
+    A view is a virtual table that is based on the result set of a SELECT statement. It is different from a table in that it does not store data itself but instead provides a way to access and manipulate data from one or more tables.
+8. How do you optimize a SQL query for performance?
+    Some ways to optimize a SQL query for performance include using indexes, minimizing the number of joins, limiting the amount of data returned, and optimizing the query syntax.
+9. What is database replication, and how is it used in MySQL?
+    Database replication is the process of copying data from one database to another in real-time. It is used in MySQL to create backup copies of databases, distribute data across multiple servers, or improve query performance by offloading read operations to slave servers.
+10. What is database sharding, and when might you use it?
+    Database sharding is the process of partitioning a large database into smaller, more manageable pieces called shards. It is used to improve scalability and performance by distributing data across multiple servers.
+11. What is a database transaction, and why is it important for data integrity?
+    A database transaction is a logical unit of work that consists of one or more database operations, such as INSERT, UPDATE, or DELETE. It is important for data integrity because it ensures that all database operations are completed successfully before making any changes permanent.
+12. What is the difference between a primary key and a foreign key?
+    A primary key is a unique identifier for a row in a table, while a foreign key is a reference to a primary key in another table. Foreign keys are used to establish relationships between tables.
+13. What is ACID, and how does it relate to database transactions?
+    ACID stands for Atomicity, Consistency, Isolation, and Durability, and it is a set of properties that ensure data integrity and reliability in database transactions. It relates to database transactions because it provides a framework for ensuring that all operations in a transaction are completed successfully, and that the database remains in a consistent state.
+14. How do you backup and restore a MySQL database?
+    To backup a MySQL database, you can use the mysqldump command to create a backup file. To restore a MySQL database, you can use the mysql command to execute the backup file.
+15. What is the difference between MyISAM and InnoDB storage engines in MySQL?
+    MyISAM and InnoDB are two different storage engines in MySQL. MyISAM is a simple storage engine that is optimized for read-heavy workloads, while InnoDB is a more advanced storage engine that supports transactions and is optimized for write-heavy workloads.
+16. What is the difference between a database and a schema in MySQL?
+    In MySQL, a database is a collection of tables, while a schema is a logical container for tables and other database objects. A schema can be used to organize tables and establish relationships between them.
+17. What is the maximum number of databases and tables that MySQL can handle?
+    The maximum number of databases and tables that MySQL can handle depends on the version of MySQL and the available hardware resources. In general, MySQL can support thousands of databases and tables, but the specific limits will vary based on the configuration of the system.
+18. How do you monitor MySQL performance, and what tools can you use?
+    You can monitor MySQL performance by using tools like MySQL Workbench, MySQL Enterprise Monitor, or third-party monitoring tools like Nagios or Zabbix. These tools can provide real-time performance metrics, alerts for potential issues, and recommendations for optimizing performance.
+19. What is the MySQL Workbench, and how is it used for database management?
+    MySQL Workbench is a graphical user interface tool for managing MySQL databases. It can be used to design and model databases, create and execute SQL queries, manage user accounts and permissions, and monitor database performance.
+20. What is the difference between SQL and NoSQL databases, and when might you choose one over the other?
+    SQL databases are relational databases that use tables to store data, while NoSQL databases are non-relational databases that use key-value pairs, documents, or graph structures to store data. SQL databases are typically used for applications that require complex queries and transactions, while NoSQL databases are often used for applications that require high scalability and performance with unstructured data.
