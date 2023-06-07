@@ -1,0 +1,100 @@
+  1. SELECT: 
+		a. used to retrieve data from one or more tables
+2. INSERT: 
+		a. used to add new rows to a table
+3. UPDATE:
+		a.  used to modify existing rows in a table
+4. DELETE:
+		a.  used to remove rows from a table
+5. CREATE: 
+		a. used to create a new table, view, or other database object
+6. ALTER: 
+		a. used to modify the structure of an existing table or other database object
+7. DROP: 
+		a. used to delete a table, view, or other database object
+8. TRUNCATE: 
+		a. used to remove all rows from a table
+9. UNION: 
+		a. used to combine the results of two or more SELECT statements into a single result set
+10. JOIN:
+		a.  used to combine related data from two or more tables based on a common column
+11. INNER JOIN: 
+		a. returns only the rows that have matching records in both tables being joined
+12. LEFT JOIN: 
+		a. returns all the rows from the left table, and the matching rows from the right table
+13. RIGHT JOIN: 
+		a. returns all the rows from the right table, and the matching rows from the left table
+14. FULL OUTER JOIN: 
+		a. returns all the rows from both tables, including the non-matching rows
+15. WHERE: 
+		a. used to filter the rows returned by a SELECT statement based on a condition
+16. GROUP BY: 
+		a. used to group rows based on one or more columns
+17. HAVING: 
+		a. used to filter the groups returned by a GROUP BY clause based on a condition
+18. ORDER BY: 
+		a. used to sort the rows returned by a SELECT statement based on one or more columns
+19. ASC: 
+		a. used with ORDER BY to sort the rows in ascending order
+20. DESC: 
+		a. used with ORDER BY to sort the rows in descending order
+21. COUNT: 
+		a. used to count the number of rows returned by a SELECT statement
+22. MAX: 
+		a. used to return the maximum value in a column
+23. MIN: 
+		a. used to return the minimum value in a column
+24. AVG:
+		a. used to return the average value in a column
+25. SUM: 
+		a. used to return the sum of values in a column
+26. DISTINCT: 
+		a. used to remove duplicates from the results of a SELECT statement
+27. BETWEEN: 
+		a. used to filter rows based on a range of values
+28. IN: 
+		a. used to filter rows based on a list of values
+29. LIKE: 
+		a. used to filter rows based on a pattern
+30. NOT: 
+		a. used to negate a condition
+31. AND: 
+		a. used to combine multiple conditions with logical AND
+32. OR: 
+		a. used to combine multiple conditions with logical OR
+33. CASE: 
+		a. used to perform conditional logic in a SELECT statement
+34. WHEN: 
+		a. used with CASE to specify a condition
+35. THEN: 
+		a. used with CASE to specify the result when the condition is true
+36. ELSE: 
+		a. used with CASE to specify the result when the condition is false
+37. EXISTS: 
+		a. used to check if a subquery returns any rows
+38. ALL: 
+		a. used to check if all values in a column meet a certain condition
+39. ANY: 
+		a. used to check if any value in a column meets a certain condition
+40. NULL: 
+		a. used to represent a missing or unknown value
+41. IS NULL: 
+		a. used to check if a value is NULL
+42. IS NOT NULL: 
+		a. used to check if a value is not NULL
+43. INDEX: 
+		a. used to create an index on one or more columns in a table
+44. CONSTRAINT: 
+		a. used to specify rules for data in a table
+45. PRIMARY KEY: 
+		a. used to specify a column or combination of columns that uniquely identify each row in a table
+46. FOREIGN KEY: 
+		a. used to create a relationship between two tables based on a common column
+47. TRANSACTION: 
+		a. used to group one or more database operations into a single unit of work
+48. COMMIT: 
+		a. used to save the changes made by a transaction
+49. ROLLBACK: 
+		a. used to undo the changes made by a transaction
+50. BEGIN: 
+		a. used to start a transaction.
