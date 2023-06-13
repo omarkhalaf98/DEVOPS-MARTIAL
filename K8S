@@ -1,36 +1,214 @@
-	1. What is kubernetes:
-		a. It’s a tool that helps use to managing containers.
-		b. Kubernetes provides tools and functionality around orchestrating container workloads.
-		c. Kubernetes is a portable, extensible, open source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
-	2. Features of K8S:
-		a. Container Orchestration:
-		b. Application reliability 
-		c. Automation
-	3. Control Plane:
-		a. Its what runs our K8S cluster globally ,  it can run on machine  in the cluster but usually run on dedicated controller machine.
-		b. Type of Control Plane:
-			i. Kupe-api-server: the primary interface to the control plane and the cluster itself.
-			ii. ETCD: the backend data store for K8S cluster.
-			iii. Kube -scheduler: the process of selecting an available node in the cluster on which the container should run.
-			iv. Kupe-controller manger: runs a collection of multiple controller utilities in single process.
-			v. Cloud controller manger: provide interface between K8S and other cloud platform.
-	4. K8S Nodes:
-		a. The machines where the containers managed by the cluster.
-		b. Nodes components:
-			i. Kubelet: it’s the K8s agent that runs on each individual node.
-				1) It communicate with control and ensure that containers are run on its node.
-				2) It handles the process of reporting container status to control plane.
-			ii. Container runtime: its not part of K8S, it’s a separate software that actually runs the container on the machine (docker , containerd).
-			iii. Kube proxy: it suns on each node providing network between container and services in the cluster.
-	5. Kubeadm: It’s a tool that simplify the process of setting our K8S cluster.
-	6. Building a K8S cluster with kubeadm: foe example we have 3 servers (1 control plane and 2 worker nodes)                  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>>>>>>>>>>>>>>>>
-		a. Install all the packages on the 3 servers (containerd and all K8S packages)
-		b. Initialize the cluster on the control plane server.
-		c. Install the calico network add-on in control plane.
-		d. Join the worker nodes to the cluster 
-	7. Name space:
-		a. Mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. 
-		b. Virtual cluster backed with the same physical cluster, it’s a way to separate and organize the objects in the cluster.
-		c. Listing exiting name spaces is done by kubectl get namespaces
-		d. All cluster have a default namespace unless I assigned a name for it (kubectl get pod --namespace the_name_of_it)
-		e. Create a new namespaces: kubectl create namespace the_name
+1. What is K8S:
+	a. Kubernetes is open source solution that provides tools and functionality around orchestrating cluster container workloads with auto scaling and self healing.
+	b. Kubernetes is a portable, extendable , It has a large rapidly growing ecosystem.  
+	c. It provides simplicity of infrastructure as a service portability of platform.
+		
+2. Kubernetes Architecture:
+	a. Control Plane
+	b. Worker Node
+	c. External System  
+	
+3. Control Plane:
+	a. Its what runs our K8S cluster globally , it can run on machine  in the cluster but usually run on dedicated controller machine.
+	b. Control Plane components:
+		v Kupe-api-server: 
+			Ø the primary interface to the control plane and the cluster itself, it’s the central hub for K8S cluster that expose K8S API
+			Ø API management.
+			Ø Authentication.
+			Ø Processing API requests and validating data for the API objects.
+		v ETCD: 
+			Ø It works as backend service and database for K8S cluster.
+			Ø Strongly consistent (change in a node update other nodes)
+			Ø Distributed (run multiple nodes in the cluster and keeping the consistency)
+			Ø Key-value store (nonrelational, stores data as keys and values, fork boltdb)
+		v Kube-scheduler: the process of selecting an available node in the cluster on which the container (pods) should run, it communicate with the control plane via API to send request to control  plane to take the cluster state to the desire state. 
+		v Kube-controller manger:
+				Ø It watches the state of the cluster, then it makes or request a change of the cluster state to be in the desired state.
+				Ø It manages all K8S controllers (pods, namespace, jobs, kube scheduler)
+				Ø List of kube-controller manger built in
+					○ Deployment controller 
+					○ Replicaset controller 
+					○ daemonSet controller 
+					○ Job Controller (Kubernetes Jobs) 
+					○ CronJob Controller 
+					○ endpoints controller 
+					○ namespace controller 
+					○ service accounts controller. 
+					○ Node controller 
+		v Cloud controller manger: 
+				Ø Provide interface between K8S and other cloud platform.
+				Ø It allows K8S cluster to provision cloud platform recourses.
+				Ø part of the cloud controller manager:
+					○ Node controller 
+					○ Route controller 
+					○ Service controller  
+				
+4. Worker Nodes:
+	a. The machines where the containers managed by the cluster.
+	b. Nodes components:
+		v Kubelet: it’s the K8s agent that runs on each individual node, it runs as a daemon. 
+			Ø It communicate with control plane and ensure that pods are running on its node.
+			Ø It handles the process of reporting container status to control plane.
+			Ø It register worker nodes to with API server and working with PodSpec.
+			Ø It handles liveliness, readiness and startup probes.
+			Ø It create, modify and delete containers for the pods.
+		v Kube proxy: it’s a daemon that runs on every node as a daemon set. (check deamonset , service in K8S                                                                                                                                                                                                                                                                                                                                                                    and endpoint in the extra section )
+			Ø When a pod is exposed using a service (clusterIP) it create network to send traffic to the backend pods (endpoint).
+			Ø It handles all the load balancing and the service discovery.
+			Ø The primarily proxies for it are TCP, UDP and SCTP but it doesn't understand HTTP.
+			Ø It has 2 modes to create/update rules for routing traffic to pods behind services which they are IPtable and IPVS:
+				○ Iptable
+					▪ Default mode, kubeproxy chooses the backend pod randomly for load balancing.
+				○ IPVS:
+					▪ For cluster with services exceeding 1000.
+					▪ It supports the following load-balancing algorithms for the backend.  
+						- rr : round-robin : It is the default mode. 
+						- lc: least connection (smallest number of open connections) 
+						- 3 dh : destination hashing 
+						- 4 sh : source hashing 
+						- 5 sed : shortest expected delay 
+						- 6 nq : never queue 
+						- 3 Userspace (legacy & not recommended) 
+						- 4 Kernelspace: This mode is only for windows systems.
+		v Container runtime: 
+			Ø it’s a software component that runs on all the nodes in K8S, it manages the entire lifecycle of container on a host from registry, running, isolation and allocation of the resources.
+			Ø K8S support multiple container runtime (CRI-O, Docker Engine, containerd)
+			Ø There is two key concepts for container runtime:
+				○ Container Runtime Interface (CRI)
+				○ Open Container Initiative (OCI)
+5. What is kubectl:
+	It’s a command line tool that allows us to interact with K8S, it uses K8S API to communicate with cluster 
+		
+
+Why cluster has to be an odd number machines to avoid split brain
+
+********************************************************************************
+What is draining? (its done when we are doing maintains) 
+	
+	It causes container running in the node to be gracefully terminated, and potentially even oved to another node to prevent any interruption. Command line (Kubectl drain <node-name> / u can add --ignore-deamonsets at the end to avoid any error .
+	Ucordon a node is to allow the pods to run on the node when the maintains is done. Command line kubectl uncordon <node-name>
+********************************************************************************
+etcd:
+	Etcd is the backend data storage solution for my K8S cluster, all objects, application and      configration are stored in etcd. That’s we must back it up.
+	We can back up etcd with command line
+	$ETCDCTL_APT=3 etcd --endpoint
+	$ENDPOINT snapshot save<filename> 
+	To restore etcd data command line ETCD_AP=3 snapshot restore <file-name>
+********************************************************************************
+DaemonSet:
+	Its an object that is designed to ensure that a single pod runs on each worker node. 
+********************************************************************************
+
+Service in K8S:
+	Its an abstraction layer that provides IP address (clusterIP) and DNS name for accessing a group of pods.
+	Its only accessible with the K8S cluster.
+********************************************************************************
+
+Endpoint:
+	Its an object that represent network end point for a service.
+	Its created automatically when a service is created.
+	Its responsible for maintaining a list of pods IP address, in that way it lets the control plane to keep track of the service and pods states.
+********************************************************************************
+Kubeadm: 
+	It’s a tool that simplify the process of setting our K8S cluster.
+	Install all the packages on the 3 servers (containerd and all K8S packages)
+	Initialize the cluster on the control plane server.
+	Install the calico network add-on in control plane.
+	Join the worker nodes to the cluster 
+********************************************************************************
+
+Name space:
+	○ Mechanism for isolating groups of resources within a single cluster. Names of resources need to be unique within a namespace, but not across namespaces. 
+	○ Virtual cluster backed with the same physical cluster, it’s a way to separate and organize the objects in the cluster.
+	○ Listing exiting name spaces is done by kubectl get namespaces
+	○ All cluster have a default namespace unless I assigned a name for it (kubectl get pod --namespace the_name_of_it)
+	○ Create a new namespaces: kubectl create namespace the_name
+********************************************************************************
+
+K8S Management tools :
+	Kubectl: its official command line interface for K8S.
+	Kubeadm: allows to quickly and easily create K8S cluster.
+	Minikube: allows to set up a local single node K8S cluster (its good for development purposes)
+	Helm: provides template and package management for K8S objects. (it can turn application or objects in your cluster into a template)
+	Kompose: it translate docker compose files into K8S objects .
+	Kustomsize: configuration management tool, it allow us to share and reuse template.
+
+Building a K8S cluster with kubeadm: foe example we have 3 servers (1 control plane and 2 worker nodes)
+Example on 3 servers for cluster:  
+
+1. Create configuration file for containerd:
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf overlay br_netfilter EOF 
+2. Load modules:
+sudo modprobe overlay sudo modprobe br_netfilter 
+3. Set system configurations for Kubernetes networking:
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf net.bridge.bridge-nf-call-iptables = 1 net.ipv4.ip_forward = 1 net.bridge.bridge-nf-call-ip6tables = 1 EOF 
+4. Apply new settings:
+sudo sysctl --system 
+5. Install containerd:
+sudo apt-get update && sudo apt-get install -y containerd.io 
+6. Create default configuration file for containerd:
+sudo mkdir -p /etc/containerd 
+7. Generate default containerd configuration and save to the newly created default file:
+sudo containerd config default | sudo tee /etc/containerd/config.toml 
+8. Restart containerd to ensure new configuration file usage:
+sudo systemctl restart containerd 
+9. Verify that containerd is running:
+sudo systemctl status containerd 
+10. Disable swap:
+sudo swapoff -a 
+11. Install dependency packages:
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl 
+12. Download and add GPG key:
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
+13. Add Kubernetes to repository list:
+cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list deb https://apt.kubernetes.io/ kubernetes-xenial main EOF 
+14. Update package listings:
+sudo apt-get update 
+15. Install Kubernetes packages (Note: If you get a dpkg lock message, just wait a minute or two before trying the command again):
+sudo apt-get install -y kubelet=1.24.0-00 kubeadm=1.24.0-00 kubectl=1.24.0-00 
+16. Turn off automatic updates:
+sudo apt-mark hold kubelet kubeadm kubectl 
+17. Log in to both worker nodes to perform previous steps.
+Initialize the Cluster
+1. On the control plane node, initialize the Kubernetes cluster on the control plane node using kubeadm:
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.24.0 
+2. Set kubectl access:
+mkdir -p $HOME/.kube sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config sudo chown $(id -u):$(id -g) $HOME/.kube/config 
+3. Test access to cluster:
+kubectl get nodes 
+Install the Calico Network Add-On
+1. On the control plane node, install Calico Networking:
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml 
+2. Check status of the control plane node:
+kubectl get nodes 
+Join the Worker Nodes to the Cluster
+1. In the control plane node, create the token and copy the kubeadm join command:
+kubeadm token create --print-join-command 
+Note: This output will be used as the next command for the worker nodes.
+2. Copy the full output from the previous command used in the control plane node. This command starts with kubeadm join.
+3. In both worker nodes, paste the full kubeadm join command to join the cluster. Use sudo to run it as root:
+sudo kubeadm join... 
+4. In the control plane node, view cluster status:
+kubectl get nodes
+
+Back Up the etcd Data
+
+1. Look up the value for the key cluster.name in the etcd cluster:
+ETCDCTL_API=3 etcdctl get cluster.name \ --endpoints=https://10.0.1.101:2379 \ --cacert=/home/cloud_user/etcd-certs/etcd-ca.pem \ --cert=/home/cloud_user/etcd-certs/etcd-server.crt \ --key=/home/cloud_user/etcd-certs/etcd-server.key 
+The returned value should be beebox.
+2. Back up etcd using etcdctl and the provided etcd certificates:
+ETCDCTL_API=3 etcdctl snapshot save /home/cloud_user/etcd_backup.db \ --endpoints=https://10.0.1.101:2379 \ --cacert=/home/cloud_user/etcd-certs/etcd-ca.pem \ --cert=/home/cloud_user/etcd-certs/etcd-server.crt \ --key=/home/cloud_user/etcd-certs/etcd-server.key 
+3. Reset etcd by removing all existing etcd data:
+sudo systemctl stop etcd 
+sudo rm -rf /var/lib/etcd
+ **********************************************************************************************************
+Restore the etcd Data from the Backup
+
+1. Restore the etcd data from the backup (this command spins up a temporary etcd cluster, saving the data from the backup file to a new data directory in the same location where the previous data directory was):
+sudo ETCDCTL_API=3 etcdctl snapshot restore /home/cloud_user/etcd_backup.db \ --initial-cluster etcd-restore=https://10.0.1.101:2380 \ --initial-advertise-peer-urls https://10.0.1.101:2380 \ --name etcd-restore \ --data-dir /var/lib/etcd 
+2. Set ownership on the new data directory:
+sudo chown -R etcd:etcd /var/lib/etcd 
+3. Start etcd:
+sudo systemctl start etcd 
+4. Verify the restored data is present by looking up the value for the key cluster.name again:
+ETCDCTL_API=3 etcdctl get cluster.name \ --endpoints=https://10.0.1.101:2379 \ --cacert=/home/cloud_user/etcd-certs/etcd-ca.pem \ --cert=/home/cloud_user/etcd-certs/etcd-server.crt \ --key=/home/cloud_user/etcd-certs/etcd-server.key
