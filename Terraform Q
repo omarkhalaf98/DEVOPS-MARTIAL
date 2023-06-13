@@ -1,0 +1,24 @@
+	1. What is Terraform?
+		a. Its an open source infrastructure as a code tool, for building, changing and versioning infrastructure safely and efficiently  (Provisioning tool)
+	
+	2. Why should we use Terraform?
+		a. Let us define infrastructure in a code
+		b. It’s the only tool that its agnostic, it can work on all the infrastructure cloud providers.
+		c. It has all the coding principles.
+	
+	3. How does it work?
+		a. Terraform is split into two main parts Terraform Core and Terraform Plugins
+			i. Core: 
+				1) Its statically complied binary written in go.
+				2) It reads and interpolate configration files and modules.
+				3) Recourses state management.
+				4) Plan execution.
+				5) Communicate with plugin over RPC.
+			ii. Plugin:
+				1) Its executable binaries invoked by Terraform Core over RPC.
+				2) Initialization of any libraries used to make API calls.
+				3) Authenticate with the provider.
+				4) Define recources the map to specific services. 
+	
+	4. Providers:
+		
